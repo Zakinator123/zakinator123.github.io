@@ -1,12 +1,7 @@
 github_users:
-  - torvalds
-  - alshedivat
+  - zakinator123
 
 github_repos:
-  - alshedivat/al-folio
-  - twbs/bootstrap
-  - jekyll/jekyll
-  - jquery/jquery
-  - FortAwesome/Font-Awesome
-  - jpswalsh/academicons
-  - mathjax/MathJax
+  - zakinator123/private-ai-data-analyst
+  - zakinator123/ask-airy
+  - zakinator123/checkout-cart
