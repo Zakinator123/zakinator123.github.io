@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <!-- Head -->
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    <!-- Metadata, OpenGraph and Schema.org -->
+    
+
+    <!-- Standard metadata -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Incorporating AI into Applications - A Survey | Zakey  Faieq</title>
+    <meta name="author" content="Zakey  Faieq">
+    <meta name="description" content="An overview of the current state of AI in applications, and how we can move from Software 2.0 to 3.0">
+    <meta name="keywords" content="zakey, faieq, zakey faieq, ai">
+
+
+    <!-- Bootstrap & MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-DF7Zhf293AJxJNTmh5zhoYYIMs2oXitRfBjY+9L//AY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous">
+
+    <!-- Bootstrap Table -->
+    <link defer rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.css">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+
+    <!-- Code Syntax Highlighting -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
+
+    
+
+    <!-- Styles -->
+    
+    <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%AA%82%EF%B8%8F&lt;/text&gt;&lt;/svg&gt;">
+    
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="canonical" href="https://zakinator123.github.io/blog/2023/formatting-and-links/">
+
+    <!-- Dark Mode -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/native.css" media="none" id="highlight_theme_dark">
+
+    <script src="/assets/js/theme.js"></script>
+    <script src="/assets/js/dark_mode.js"></script>
+    
+
+  </head>
+
+  <!-- Body -->
+  <body class="fixed-top-nav ">
+
+    <!-- Header -->
+    <header>
+
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top">
+        <div class="container">
+          <a class="navbar-brand title font-weight-lighter" href="/"><span class="font-weight-bold">Zakey </span>Faieq</a>
+          <!-- Navbar Toggle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+
+              <!-- About -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/">about</a>
+              </li>
+              
+              <!-- Blog -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/blog/">blog<span class="sr-only">(current)</span></a>
+              </li>
+
+              <!-- Other pages -->
+              <li class="nav-item ">
+                <a class="nav-link" href="/projects/">projects</a>
+              </li>
+
+              <!-- Toogle theme mode -->
+              <li class="toggle-container">
+                <button id="light-toggle" title="Change theme">
+                  <i class="fas fa-moon"></i>
+                  <i class="fas fa-sun"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Scrolling Progress Bar -->
+      <progress id="progress" value="0">
+        <div class="progress-container">
+          <span class="progress-bar"></span>
+        </div>
+      </progress>
+    </header>
+
+
+    <!-- Content -->
+    <div class="container mt-5">
+      
+        <!-- _layouts/post.html -->
+
+<div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Incorporating AI into Applications - A Survey</h1>
+    <p class="post-meta">May 12, 2023</p>
+    <p class="post-tags">
+      <a href="/blog/2023"> <i class="fas fa-calendar fa-sm"></i> 2023 </a>
+        ·  
+        <a href="/blog/category/ai">
+          <i class="fas fa-tag fa-sm"></i> AI</a>  
+          <a href="/blog/category/llms">
+          <i class="fas fa-tag fa-sm"></i> LLMs</a>  
+          
+
+    </p>
+  </header>
+
+  <article class="post-content">
+    
+    <div id="markdown-content">
+      <p>There already exists a wealth of information on how LLMs can be used to accelerate productivity in the process of
+application design, development, and testing.</p>
+
+<p>This post provides a survey of new tools and techniques for incorporating user-facing AI-driven functionality into
+applications.</p>
+
+<hr>
+
+<h2 id="semantic-search-and-embeddings">Semantic Search and Embeddings</h2>
+
+<p>Semantic search is a powerful information-retrieval technique that significantly enhances search functionality. It is
+also one of the building blocks needed to give LLM-powered chatbots long-term memory as well as the ability for chatbots
+to answer questions about text data sets given a natural language query (via retrieval augmented generation).</p>
+
+<p>Searching for text data in documents or databases has traditionally been done with some variant of lexical/keyword/fuzzy
+search (e.g. ElasticSearch, Solr, PostgreSQL FTS).</p>
+
+<p>A semantic search aims not only to interpret search keywords, but also strives to determine the intent and contextual
+meaning behind a search query. For example, if you have a database of e-commerce product reviews, a semantic search
+would return relevant results given a query like “Find me the negative reviews of product X”, even if there was no
+prior labeling of the reviews as positive/negative.</p>
+
+<p>Embeddings are at the core of semantic search, and embedding models like OpenAI’s <a href="https://openai.com/blog/new-and-improved-embedding-model" rel="external nofollow noopener" target="_blank">text-embedding-ada-002</a> are cheap,
+powerful, and easier to integrate into applications than ever before.</p>
+
+<p>Embeddings are representations of data as points/vectors in n-dimensional space, where data points that are similar in
+meaning cluster together.</p>
+
+<p>A basic semantic search that finds the most relevant pieces of data for a user’s query can be implemented by:</p>
+
+<ol>
+  <li>Generating and storing embeddings for the data to be searched</li>
+  <li>Generating an embedding of the user’s query</li>
+  <li>Finding the k-nearest-neighbor (kNN) embeddings to the query embedding.</li>
+</ol>
+
+<p>To see what a semantic search via cosine similarity looks like in code, here’s a very basic example demonstrating
+exact nearest neighbor (ENN) search to find the top k most relevant records for a query.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">computeDotProduct</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">[],</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">[])</span> <span class="o">=&gt;</span>
+    <span class="nx">a</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">x</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">*</span> <span class="nx">b</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nf">reduce</span><span class="p">((</span><span class="nx">m</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">m</span> <span class="o">+</span> <span class="nx">n</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">getTopKNearestNeighbors</span> <span class="o">=</span> <span class="k">async </span><span class="p">(</span><span class="nx">recordsToSearch</span><span class="p">:</span> <span class="nb">Record</span><span class="p">[],</span> <span class="nx">searchQuery</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">k</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">embeddedQuery</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">getEmbeddingForString</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">);</span>
+
+    <span class="c1">// Create a min-heap to keep track of of the top k most relevant results</span>
+    <span class="kd">const</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Heap</span><span class="o">&lt;</span><span class="p">[</span><span class="kr">number</span><span class="p">,</span> <span class="nb">Record</span><span class="p">]</span><span class="o">&gt;</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">for </span><span class="p">(</span><span class="kd">const</span> <span class="nx">record</span> <span class="k">of</span> <span class="nx">recordsToSearch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">recordEmbedding</span> <span class="o">=</span> <span class="nx">record</span><span class="p">.</span><span class="nf">getEmbedding</span><span class="p">();</span>
+        <span class="kd">const</span> <span class="nx">dotProduct</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nf">computeDotProduct</span><span class="p">(</span><span class="nx">embeddedQuery</span><span class="p">,</span> <span class="nx">record</span><span class="p">.</span><span class="nf">getEmbedding</span><span class="p">());</span>
+
+        <span class="k">if </span><span class="p">(</span><span class="nx">heap</span><span class="p">.</span><span class="nf">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">heap</span><span class="p">.</span><span class="nf">push</span><span class="p">([</span><span class="nx">dotProduct</span><span class="p">,</span> <span class="nx">record</span><span class="p">]);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">dotProduct</span> <span class="o">&gt;</span> <span class="nx">heap</span><span class="p">.</span><span class="nf">peek</span><span class="p">()</span><span class="o">!</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nx">heap</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
+            <span class="nx">heap</span><span class="p">.</span><span class="nf">push</span><span class="p">([</span><span class="nx">dotProduct</span><span class="p">,</span> <span class="nx">record</span><span class="p">]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">heap</span><span class="p">.</span><span class="nf">toArray</span><span class="p">())</span>
+        <span class="p">.</span><span class="nf">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">recordWithDotProduct</span> <span class="o">=&gt;</span> <span class="nx">recordWithDotProduct</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>Embeddings can be generated for long unstructured data via chunking (e.g. textbooks, wikipedia articles) as well as
+structured data (rows in a database). They can be stored in specialized vector databases, or even <a href="https://github.com/pgvector/pgvector" rel="external nofollow noopener" target="_blank">relational</a> databases.</p>
+
+<p>There are multiple techniques for enhancing semantic search:</p>
+
+<ul>
+  <li>Hypothetical Document Embeddings (<a href="https://wfhbrian.com/revolutionizing-search-how-hypothetical-document-embeddings-hyde-can-save-time-and-increase-productivity/" rel="external nofollow noopener" target="_blank">HyDE</a>)</li>
+  <li>Using a <a href="https://txt.cohere.com/rerank/" rel="external nofollow noopener" target="_blank">rerank</a> model to optimize search result ordering</li>
+  <li>Using a <a href="https://js.langchain.com/docs/modules/indexes/retrievers/supabase-hybrid" rel="external nofollow noopener" target="_blank">hybrid Lexical + Semantic search</a>, combined with a rerank.</li>
+  <li>Pre/Post filtering using metadata</li>
+</ul>
+
+<p>Embeddings have many other applications beyond semantic search, like recommendations, clustering, classification, and
+anomaly detection, to name a few.</p>
+
+<hr>
+
+<h2 id="chatbots-armed-with-data">Chatbots Armed with Data</h2>
+
+<p>The classic first-order use case for LLMs in applications is a chatbot that can respond to queries about
+specific/private data without hallucinating. For example, if you have a private database of company policies,
+a question you could ask a chatbot with access to this data is “What is my company’s PTO policy?”.</p>
+
+<p>The general approach is to find all data relevant to the user’s query (e.g. with a semantic search), then ‘stuff’ as
+much of the relevant data as possible into an LLM prompt along with the user’s query, and ideally get a data-backed
+response in natural language. This is how the ChatGPT retrieval plugin works. Various techniques exist to
+enhance/augment this process as well.</p>
+
+<p>Especially when combined with voice transcription - chatbots with semantic search capabilities can be a powerful feature
+for users that have questions about text-heavy data sets.</p>
+
+<p>“Long term memory” for chatbots can also be approximated by making all previous conversations semantically searchable
+and “recalling” the most relevant ones for the current conversation via semantic search.</p>
+
+<p>However, stuffing semantic search results is not a panacea. A user cannot conduct statistical/numerical analysis over a
+data set with this approach, and users may not want natural language as the input/output.</p>
+
+<hr>
+
+<h2 id="beyond-chatbots-semi-autonomous-llm-agents-with-tools">Beyond Chatbots: Semi-Autonomous LLM Agents with Tools</h2>
+
+<p>LLMs are game-changing when we augment them with tools and memory, and use them as reasoning engines within our code, as
+seen with ChatGPT plugins.</p>
+
+<p>If given access to an environment where they can execute code, LLMs can write SQL scripts or Python code to answer
+complex statistical/numerical analysis queries. The ChatGPT code interpreter plugin is a prime example.</p>
+
+<p>If given access to a file system, LLMs can accept inputs and generate outputs other than natural language (e.g. charts,
+PDF reports, executable files).</p>
+
+<p>If given access to a ‘memory’ datastore (typically a vector DB), previously generated code and conversations can be
+stored and retrieved (typically via a semantic search). LLMs can even progressively build up a <a href="https://voyager.minedojo.org/assets/documents/voyager.pdf" rel="external nofollow noopener" target="_blank">skill</a> library where
+generated functions are composed together to achieve tasks of ever-increasing complexity.</p>
+
+<p>If given access to a human, agents can be provided with additional guidance or clarification in order to perform its
+task correctly.</p>
+
+<p>LLMs can be used as reasoning engines within applications to decide which tool or branch of logic is appropriate to
+satisfy a user’s query.</p>
+
+<h2 id="a-powerful-example">A Powerful Example</h2>
+
+<p>Here’s a concrete example of a (hypothetical) feature that can be built today with current technology:</p>
+
+<ol>
+  <li>User voice query: “Generate a weekly PDF report containing XYZ statistical data about our customers and email it to
+me@example.com”</li>
+  <li>Input transcribed to text and provided to “plan-and-execute” LLM.</li>
+  <li>LLM generates SQL+python code to conduct data analysis/visualization to satisfy the user’s query. Code iterated upon (
+autonomously), validated, and then executed.</li>
+  <li>LLM generates code to save data analysis and visualization output into a PDF and programmatically upload the report to
+Amazon S3, and send an email with a link to the PDF..</li>
+  <li>LLM saves the generated code into long term memory in a vector database for future reuse in similar or more complex
+tasks.</li>
+  <li>LLM uses the AWS SDK to programmatically create an AWS Lambda function that generates and emails an updated report every
+week using the generated code.</li>
+</ol>
+
+<h2 id="other-considerations">Other Considerations</h2>
+
+<ul>
+  <li>Prompt Injection is a major issue for applications that integrate user-facing LLMs.</li>
+  <li>Reliability of LLM outputs is another hard problem. Frameworks are emerging to address this.</li>
+  <li>LLM latency, context windows, and specialization to perform certain tasks will all improve over time.</li>
+  <li>Evaluation of LLM agent performance will become an important QA discipline.</li>
+  <li>Langchain seems to be the center for cutting-edge developments with respect to incorporating LLMs into user facing
+applications.</li>
+  <li>As AI models get smaller and faster, they will be able to run locally using things like WebGPU, mitigating privacy
+concerns.</li>
+</ul>
+
+    </div>
+  </article>
+
+
+  
+    
+    <br>
+    <hr>
+    <br>
+    <ul class="list-disc pl-8"></ul>
+
+    <!-- Adds related posts to the end of an article -->
+    <h2 class="text-3xl font-semibold mb-4 mt-12">Enjoy Reading This Article?</h2>
+    <p class="mb-2">Here are some more articles you might like to read next:</p>
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/sidebar-table-of-contents/">a post with table of contents on a sidebar</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/audios/">a post with audios</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/videos/">a post with videos</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/tables/">displaying beautiful tables with Bootstrap Tables</a>
+  </li>
+
+  
+
+  <li class="my-2">
+    <a class="text-pink-700 underline font-semibold hover:text-pink-800" href="/blog/2023/table-of-contents/">a post with table of contents</a>
+  </li>
+
+</div>
+
+      
+    </div>
+
+    <!-- Footer -->
+<!--    
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        &copy; Copyright 2023 Zakey  Faieq. 
+      </div>
+    </footer>-->
+
+    <!-- JavaScripts -->
+    <!-- jQuery -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- Bootsrap & MDB scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha256-fgLAgv7fyCGopR/gBNq2iW3ZKIdqIcyshnUULC4vex8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script>
+
+    <!-- Masonry & imagesLoaded -->
+  <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script defer src="/assets/js/masonry.js" type="text/javascript"></script>
+    
+  <!-- Medium Zoom JS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.8/dist/medium-zoom.min.js" integrity="sha256-7PhEpEWEW0XXQ0k6kQrPKwuoIomz8R8IYyuU1Qew4P8=" crossorigin="anonymous"></script>
+  <script defer src="/assets/js/zoom.js"></script>
+
+  <!-- Bootstrap Table -->
+  <script defer src="https://unpkg.com/bootstrap-table@1.21.4/dist/bootstrap-table.min.js"></script>
+
+  <!-- Load Common JS -->
+  <script src="/assets/js/no_defer.js"></script>
+  <script defer src="/assets/js/common.js"></script>
+  <script defer src="/assets/js/copy_code.js" type="text/javascript"></script>
+
+    
+  <script async src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script async src="https://badge.dimensions.ai/badge.js"></script>
+
+    <!-- MathJax -->
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        tags: 'ams'
+      }
+    };
+  </script>
+  <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js"></script>
+  <script defer src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+
+    
+    
+
+<!-- Scrolling Progress Bar -->
+<script type="text/javascript">
+  /*
+   * This JavaScript code has been adapted from the article 
+   * https://css-tricks.com/reading-position-indicator/ authored by Pankaj Parashar, 
+   * published on the website https://css-tricks.com on the 7th of May, 2014.
+   * Couple of changes were made to the original code to make it compatible 
+   * with the `al-foio` theme.
+   */
+  const progressBar = $("#progress");
+  /*
+   * We set up the bar after all elements are done loading.
+   * In some cases, if the images in the page are larger than the intended
+   * size they'll have on the page, they'll be resized via CSS to accomodate
+   * the desired size. This mistake, however, breaks the computations as the
+   * scroll size is computed as soon as the elements finish loading.
+   * To account for this, a minimal delay was introduced before computing the
+   * values.
+   */
+  window.onload = function () {
+    setTimeout(progressBarSetup, 50);
+  };
+  /*
+   * We set up the bar according to the browser.
+   * If the browser supports the progress element we use that.
+   * Otherwise, we resize the bar thru CSS styling
+   */
+  function progressBarSetup() {
+    if ("max" in document.createElement("progress")) {
+      initializeProgressElement();
+      $(document).on("scroll", function() {
+        progressBar.attr({ value: getCurrentScrollPosition() });
+      });
+      $(window).on("resize", initializeProgressElement);
+    } else {
+      resizeProgressBar();
+      $(document).on("scroll", resizeProgressBar);
+      $(window).on("resize", resizeProgressBar);
+    }
+  }
+  /*
+   * The vertical scroll position is the same as the number of pixels that
+   * are hidden from view above the scrollable area. Thus, a value > 0 is
+   * how much the user has scrolled from the top
+   */
+  function getCurrentScrollPosition() {
+    return $(window).scrollTop();
+  }
+
+  function initializeProgressElement() {
+    let navbarHeight = $("#navbar").outerHeight(true);
+    $("body").css({ "padding-top": navbarHeight });
+    $("progress-container").css({ "padding-top": navbarHeight });
+    progressBar.css({ top: navbarHeight });
+    progressBar.attr({
+      max: getDistanceToScroll(),
+      value: getCurrentScrollPosition(),
+    });
+  }
+  /*
+   * The offset between the html document height and the browser viewport
+   * height will be greater than zero if vertical scroll is possible.
+   * This is the distance the user can scroll
+   */
+  function getDistanceToScroll() {
+    return $(document).height() - $(window).height();
+  }
+
+  function resizeProgressBar() {
+    progressBar.css({ width: getWidthPercentage() + "%" });
+  }
+  // The scroll ratio equals the percentage to resize the bar
+  function getWidthPercentage() {
+    return (getCurrentScrollPosition() / getDistanceToScroll()) * 100;
+  }
+</script>
+
+  </body>
+</html>

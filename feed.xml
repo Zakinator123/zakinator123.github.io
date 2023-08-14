@@ -1,104 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://zakinator123.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://zakinator123.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-06-23T02:46:15+00:00</updated><id>https://zakinator123.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">a post with custom blockquotes</title><link href="https://zakinator123.github.io/blog/2023/custom-blockquotes/" rel="alternate" type="text/html" title="a post with custom blockquotes" /><published>2023-05-12T19:53:00+00:00</published><updated>2023-05-12T19:53:00+00:00</updated><id>https://zakinator123.github.io/blog/2023/custom-blockquotes</id><content type="html" xml:base="https://zakinator123.github.io/blog/2023/custom-blockquotes/"><![CDATA[<p>This post shows how to add custom styles for blockquotes. Based on <a href="https://github.com/sighingnow/jekyll-gitbook">jekyll-gitbook</a> implementation.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://zakinator123.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://zakinator123.github.io/" rel="alternate" type="text/html" hreflang="en" /><updated>2023-08-14T23:51:01+00:00</updated><id>https://zakinator123.github.io/feed.xml</id><title type="html">blank</title><entry><title type="html">Incorporating AI into Applications - A Survey</title><link href="https://zakinator123.github.io/blog/2023/formatting-and-links/" rel="alternate" type="text/html" title="Incorporating AI into Applications - A Survey" /><published>2023-05-12T19:53:00+00:00</published><updated>2023-05-12T19:53:00+00:00</updated><id>https://zakinator123.github.io/blog/2023/formatting-and-links</id><content type="html" xml:base="https://zakinator123.github.io/blog/2023/formatting-and-links/"><![CDATA[<p>There already exists a wealth of information on how LLMs can be used to accelerate productivity in the process of
+application design, development, and testing.</p>
 
-<p>We decided to support the same custom blockquotes as in <a href="https://sighingnow.github.io/jekyll-gitbook/jekyll/2022-06-30-tips_warnings_dangers.html">jekyll-gitbook</a>, which are also found in a lot of other sites’ styles. The styles definitions can be found on the <a href="https://github.com/alshedivat/al-folio/blob/master/_sass/_base.scss">_base.scss</a> file, more specifically:</p>
+<p>This post provides a survey of new tools and techniques for incorporating user-facing AI-driven functionality into
+applications.</p>
 
-<div class="language-scss highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/* Tips, warnings, and dangers */</span>
-<span class="nc">.post</span> <span class="nc">.post-content</span> <span class="nt">blockquote</span> <span class="p">{</span>
-    <span class="k">&amp;</span><span class="nc">.block-tip</span> <span class="p">{</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-tip-block</span><span class="p">);</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-tip-block-bg</span><span class="p">);</span>
+<hr />
 
-    <span class="nt">p</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-tip-block-text</span><span class="p">);</span>
+<h2 id="semantic-search-and-embeddings">Semantic Search and Embeddings</h2>
+
+<p>Semantic search is a powerful information-retrieval technique that significantly enhances search functionality. It is
+also one of the building blocks needed to give LLM-powered chatbots long-term memory as well as the ability for chatbots
+to answer questions about text data sets given a natural language query (via retrieval augmented generation).</p>
+
+<p>Searching for text data in documents or databases has traditionally been done with some variant of lexical/keyword/fuzzy
+search (e.g. ElasticSearch, Solr, PostgreSQL FTS).</p>
+
+<p>A semantic search aims not only to interpret search keywords, but also strives to determine the intent and contextual
+meaning behind a search query. For example, if you have a database of e-commerce product reviews, a semantic search
+would return relevant results given a query like “Find me the negative reviews of product X”, even if there was no
+prior labeling of the reviews as positive/negative.</p>
+
+<p>Embeddings are at the core of semantic search, and embedding models like OpenAI’s <a href="https://openai.com/blog/new-and-improved-embedding-model">text-embedding-ada-002</a> are cheap,
+powerful, and easier to integrate into applications than ever before.</p>
+
+<p>Embeddings are representations of data as points/vectors in n-dimensional space, where data points that are similar in
+meaning cluster together.</p>
+
+<p>A basic semantic search that finds the most relevant pieces of data for a user’s query can be implemented by:</p>
+
+<ol>
+  <li>Generating and storing embeddings for the data to be searched</li>
+  <li>Generating an embedding of the user’s query</li>
+  <li>Finding the k-nearest-neighbor (kNN) embeddings to the query embedding.</li>
+</ol>
+
+<p>To see what a semantic search via cosine similarity looks like in code, here’s a very basic example demonstrating
+exact nearest neighbor (ENN) search to find the top k most relevant records for a query.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">computeDotProduct</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">:</span> <span class="kr">number</span><span class="p">[],</span> <span class="nx">b</span><span class="p">:</span> <span class="kr">number</span><span class="p">[])</span> <span class="o">=&gt;</span>
+    <span class="nx">a</span><span class="p">.</span><span class="nf">map</span><span class="p">((</span><span class="nx">x</span><span class="p">,</span> <span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">*</span> <span class="nx">b</span><span class="p">[</span><span class="nx">i</span><span class="p">]).</span><span class="nf">reduce</span><span class="p">((</span><span class="nx">m</span><span class="p">,</span> <span class="nx">n</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">m</span> <span class="o">+</span> <span class="nx">n</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">getTopKNearestNeighbors</span> <span class="o">=</span> <span class="k">async </span><span class="p">(</span><span class="nx">recordsToSearch</span><span class="p">:</span> <span class="nb">Record</span><span class="p">[],</span> <span class="nx">searchQuery</span><span class="p">:</span> <span class="kr">string</span><span class="p">,</span> <span class="nx">k</span><span class="p">:</span> <span class="kr">number</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">embeddedQuery</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">getEmbeddingForString</span><span class="p">(</span><span class="nx">searchQuery</span><span class="p">);</span>
+
+    <span class="c1">// Create a min-heap to keep track of of the top k most relevant results</span>
+    <span class="kd">const</span> <span class="nx">heap</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Heap</span><span class="o">&lt;</span><span class="p">[</span><span class="kr">number</span><span class="p">,</span> <span class="nb">Record</span><span class="p">]</span><span class="o">&gt;</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="k">for </span><span class="p">(</span><span class="kd">const</span> <span class="nx">record</span> <span class="k">of</span> <span class="nx">recordsToSearch</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">recordEmbedding</span> <span class="o">=</span> <span class="nx">record</span><span class="p">.</span><span class="nf">getEmbedding</span><span class="p">();</span>
+        <span class="kd">const</span> <span class="nx">dotProduct</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nf">computeDotProduct</span><span class="p">(</span><span class="nx">embeddedQuery</span><span class="p">,</span> <span class="nx">record</span><span class="p">.</span><span class="nf">getEmbedding</span><span class="p">());</span>
+
+        <span class="k">if </span><span class="p">(</span><span class="nx">heap</span><span class="p">.</span><span class="nf">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="nx">k</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">heap</span><span class="p">.</span><span class="nf">push</span><span class="p">([</span><span class="nx">dotProduct</span><span class="p">,</span> <span class="nx">record</span><span class="p">]);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if </span><span class="p">(</span><span class="nx">dotProduct</span> <span class="o">&gt;</span> <span class="nx">heap</span><span class="p">.</span><span class="nf">peek</span><span class="p">()</span><span class="o">!</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+            <span class="nx">heap</span><span class="p">.</span><span class="nf">pop</span><span class="p">();</span>
+            <span class="nx">heap</span><span class="p">.</span><span class="nf">push</span><span class="p">([</span><span class="nx">dotProduct</span><span class="p">,</span> <span class="nx">record</span><span class="p">]);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 
-    <span class="nt">h1</span><span class="o">,</span> <span class="nt">h2</span><span class="o">,</span> <span class="nt">h3</span><span class="o">,</span> <span class="nt">h4</span><span class="o">,</span> <span class="nt">h5</span><span class="o">,</span> <span class="nt">h6</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-tip-block-title</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-  <span class="k">&amp;</span><span class="nc">.block-warning</span> <span class="p">{</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-warning-block</span><span class="p">);</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-warning-block-bg</span><span class="p">);</span>
-
-    <span class="nt">p</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-warning-block-text</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="nt">h1</span><span class="o">,</span> <span class="nt">h2</span><span class="o">,</span> <span class="nt">h3</span><span class="o">,</span> <span class="nt">h4</span><span class="o">,</span> <span class="nt">h5</span><span class="o">,</span> <span class="nt">h6</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-warning-block-title</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-  <span class="k">&amp;</span><span class="nc">.block-danger</span> <span class="p">{</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-danger-block</span><span class="p">);</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-danger-block-bg</span><span class="p">);</span>
-
-    <span class="nt">p</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-danger-block-text</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="nt">h1</span><span class="o">,</span> <span class="nt">h2</span><span class="o">,</span> <span class="nt">h3</span><span class="o">,</span> <span class="nt">h4</span><span class="o">,</span> <span class="nt">h5</span><span class="o">,</span> <span class="nt">h6</span> <span class="p">{</span>
-      <span class="nl">color</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="n">global-danger-block-title</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">}</span>
+    <span class="k">return</span> <span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">heap</span><span class="p">.</span><span class="nf">toArray</span><span class="p">())</span>
+        <span class="p">.</span><span class="nf">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="nx">a</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">recordWithDotProduct</span> <span class="o">=&gt;</span> <span class="nx">recordWithDotProduct</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
-<p>A regular blockquote can be used as following:</p>
+<p>Embeddings can be generated for long unstructured data via chunking (e.g. textbooks, wikipedia articles) as well as
+structured data (rows in a database). They can be stored in specialized vector databases, or even <a href="https://github.com/pgvector/pgvector">relational</a> databases.</p>
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; This is a regular blockquote</span>
-<span class="gt">&gt; and it can be used as usual</span>
-</code></pre></div></div>
+<p>There are multiple techniques for enhancing semantic search:</p>
 
-<blockquote>
-  <p>This is a regular blockquote
-and it can be used as usual</p>
-</blockquote>
+<ul>
+  <li>Hypothetical Document Embeddings (<a href="https://wfhbrian.com/revolutionizing-search-how-hypothetical-document-embeddings-hyde-can-save-time-and-increase-productivity/">HyDE</a>)</li>
+  <li>Using a <a href="https://txt.cohere.com/rerank/">rerank</a> model to optimize search result ordering</li>
+  <li>Using a <a href="https://js.langchain.com/docs/modules/indexes/retrievers/supabase-hybrid">hybrid Lexical + Semantic search</a>, combined with a rerank.</li>
+  <li>Pre/Post filtering using metadata</li>
+</ul>
 
-<p>These custom styles can be used by adding the specific class to the blockquote, as follows:</p>
+<p>Embeddings have many other applications beyond semantic search, like recommendations, clustering, classification, and
+anomaly detection, to name a few.</p>
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ##### TIP</span>
-<span class="gt">&gt;</span>
-<span class="gt">&gt; A tip can be used when you want to give advice</span>
-<span class="gt">&gt; related to a certain content.</span>
-{: .block-tip }
-</code></pre></div></div>
+<hr />
 
-<blockquote class="block-tip">
-  <h5 id="tip">TIP</h5>
+<h2 id="chatbots-armed-with-data">Chatbots Armed with Data</h2>
 
-  <p>A tip can be used when you want to give advice
-related to a certain content.</p>
-</blockquote>
+<p>The classic first-order use case for LLMs in applications is a chatbot that can respond to queries about
+specific/private data without hallucinating. For example, if you have a private database of company policies,
+a question you could ask a chatbot with access to this data is “What is my company’s PTO policy?”.</p>
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ##### WARNING</span>
-<span class="gt">&gt;</span>
-<span class="gt">&gt; This is a warning, and thus should</span>
-<span class="gt">&gt; be used when you want to warn the user</span>
-{: .block-warning }
-</code></pre></div></div>
+<p>The general approach is to find all data relevant to the user’s query (e.g. with a semantic search), then ‘stuff’ as
+much of the relevant data as possible into an LLM prompt along with the user’s query, and ideally get a data-backed
+response in natural language. This is how the ChatGPT retrieval plugin works. Various techniques exist to
+enhance/augment this process as well.</p>
 
-<blockquote class="block-warning">
-  <h5 id="warning">WARNING</h5>
+<p>Especially when combined with voice transcription - chatbots with semantic search capabilities can be a powerful feature
+for users that have questions about text-heavy data sets.</p>
 
-  <p>This is a warning, and thus should
-be used when you want to warn the user</p>
-</blockquote>
+<p>“Long term memory” for chatbots can also be approximated by making all previous conversations semantically searchable
+and “recalling” the most relevant ones for the current conversation via semantic search.</p>
 
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ##### DANGER</span>
-<span class="gt">&gt;</span>
-<span class="gt">&gt; This is a danger zone, and thus should</span>
-<span class="gt">&gt; be used carefully</span>
-{: .block-danger }
-</code></pre></div></div>
+<p>However, stuffing semantic search results is not a panacea. A user cannot conduct statistical/numerical analysis over a
+data set with this approach, and users may not want natural language as the input/output.</p>
 
-<blockquote class="block-danger">
-  <h5 id="danger">DANGER</h5>
+<hr />
 
-  <p>This is a danger zone, and thus should
-be used carefully</p>
-</blockquote>]]></content><author><name></name></author><category term="sample-posts" /><category term="blockquotes" /><summary type="html"><![CDATA[an example of a blog post with custom blockquotes]]></summary></entry><entry><title type="html">a post with table of contents on a sidebar</title><link href="https://zakinator123.github.io/blog/2023/sidebar-table-of-contents/" rel="alternate" type="text/html" title="a post with table of contents on a sidebar" /><published>2023-04-25T14:14:00+00:00</published><updated>2023-04-25T14:14:00+00:00</updated><id>https://zakinator123.github.io/blog/2023/sidebar-table-of-contents</id><content type="html" xml:base="https://zakinator123.github.io/blog/2023/sidebar-table-of-contents/"><![CDATA[<p>This post shows how to add a table of contents as a sidebar.</p>
+<h2 id="beyond-chatbots-semi-autonomous-llm-agents-with-tools">Beyond Chatbots: Semi-Autonomous LLM Agents with Tools</h2>
+
+<p>LLMs are game-changing when we augment them with tools and memory, and use them as reasoning engines within our code, as
+seen with ChatGPT plugins.</p>
+
+<p>If given access to an environment where they can execute code, LLMs can write SQL scripts or Python code to answer
+complex statistical/numerical analysis queries. The ChatGPT code interpreter plugin is a prime example.</p>
+
+<p>If given access to a file system, LLMs can accept inputs and generate outputs other than natural language (e.g. charts,
+PDF reports, executable files).</p>
+
+<p>If given access to a ‘memory’ datastore (typically a vector DB), previously generated code and conversations can be
+stored and retrieved (typically via a semantic search). LLMs can even progressively build up a <a href="https://voyager.minedojo.org/assets/documents/voyager.pdf">skill</a> library where
+generated functions are composed together to achieve tasks of ever-increasing complexity.</p>
+
+<p>If given access to a human, agents can be provided with additional guidance or clarification in order to perform its
+task correctly.</p>
+
+<p>LLMs can be used as reasoning engines within applications to decide which tool or branch of logic is appropriate to
+satisfy a user’s query.</p>
+
+<h2 id="a-powerful-example">A Powerful Example</h2>
+
+<p>Here’s a concrete example of a (hypothetical) feature that can be built today with current technology:</p>
+
+<ol>
+  <li>User voice query: “Generate a weekly PDF report containing XYZ statistical data about our customers and email it to
+me@example.com”</li>
+  <li>Input transcribed to text and provided to “plan-and-execute” LLM.</li>
+  <li>LLM generates SQL+python code to conduct data analysis/visualization to satisfy the user’s query. Code iterated upon (
+autonomously), validated, and then executed.</li>
+  <li>LLM generates code to save data analysis and visualization output into a PDF and programmatically upload the report to
+Amazon S3, and send an email with a link to the PDF..</li>
+  <li>LLM saves the generated code into long term memory in a vector database for future reuse in similar or more complex
+tasks.</li>
+  <li>LLM uses the AWS SDK to programmatically create an AWS Lambda function that generates and emails an updated report every
+week using the generated code.</li>
+</ol>
+
+<h2 id="other-considerations">Other Considerations</h2>
+
+<ul>
+  <li>Prompt Injection is a major issue for applications that integrate user-facing LLMs.</li>
+  <li>Reliability of LLM outputs is another hard problem. Frameworks are emerging to address this.</li>
+  <li>LLM latency, context windows, and specialization to perform certain tasks will all improve over time.</li>
+  <li>Evaluation of LLM agent performance will become an important QA discipline.</li>
+  <li>Langchain seems to be the center for cutting-edge developments with respect to incorporating LLMs into user facing
+applications.</li>
+  <li>As AI models get smaller and faster, they will be able to run locally using things like WebGPU, mitigating privacy
+concerns.</li>
+</ul>]]></content><author><name></name></author><category term="AI" /><category term="LLMs" /><summary type="html"><![CDATA[An overview of the current state of AI in applications, and how we can move from Software 2.0 to 3.0]]></summary></entry><entry><title type="html">a post with table of contents on a sidebar</title><link href="https://zakinator123.github.io/blog/2023/sidebar-table-of-contents/" rel="alternate" type="text/html" title="a post with table of contents on a sidebar" /><published>2023-04-25T14:14:00+00:00</published><updated>2023-04-25T14:14:00+00:00</updated><id>https://zakinator123.github.io/blog/2023/sidebar-table-of-contents</id><content type="html" xml:base="https://zakinator123.github.io/blog/2023/sidebar-table-of-contents/"><![CDATA[<p>This post shows how to add a table of contents as a sidebar.</p>
 
 <h2 id="adding-a-table-of-contents">Adding a Table of Contents</h2>
 
@@ -365,7 +419,7 @@ sequenceDiagram
 </code></pre></div></div>
 
 <div class="jekyll-diagrams diagrams mermaid">
-  <svg id="mermaid-1687488385537" width="100%" xmlns="http://www.w3.org/2000/svg" height="100%" style="max-width:450px;" viewBox="-50 -10 450 231"><style>#mermaid-1687488385537 .label{font-family:trebuchet ms,verdana,arial;color:#333}#mermaid-1687488385537 .node circle,#mermaid-1687488385537 .node ellipse,#mermaid-1687488385537 .node polygon,#mermaid-1687488385537 .node rect{fill:#ececff;stroke:#9370db;stroke-width:1px}#mermaid-1687488385537 .node.clickable{cursor:pointer}#mermaid-1687488385537 .arrowheadPath{fill:#333}#mermaid-1687488385537 .edgePath .path{stroke:#333;stroke-width:1.5px}#mermaid-1687488385537 .edgeLabel{background-color:#e8e8e8}#mermaid-1687488385537 .cluster rect{fill:#ffffde!important;stroke:#aa3!important;stroke-width:1px!important}#mermaid-1687488385537 .cluster text{fill:#333}#mermaid-1687488385537 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:trebuchet ms,verdana,arial;font-size:12px;background:#ffffde;border:1px solid #aa3;border-radius:2px;pointer-events:none;z-index:100}#mermaid-1687488385537 .actor{stroke:#ccf;fill:#ececff}#mermaid-1687488385537 text.actor{fill:#000;stroke:none}#mermaid-1687488385537 .actor-line{stroke:grey}#mermaid-1687488385537 .messageLine0{marker-end:"url(#arrowhead)"}#mermaid-1687488385537 .messageLine0,#mermaid-1687488385537 .messageLine1{stroke-width:1.5;stroke-dasharray:"2 2";stroke:#333}#mermaid-1687488385537 #arrowhead{fill:#333}#mermaid-1687488385537 #crosshead path{fill:#333!important;stroke:#333!important}#mermaid-1687488385537 .messageText{fill:#333;stroke:none}#mermaid-1687488385537 .labelBox{stroke:#ccf;fill:#ececff}#mermaid-1687488385537 .labelText,#mermaid-1687488385537 .loopText{fill:#000;stroke:none}#mermaid-1687488385537 .loopLine{stroke-width:2;stroke-dasharray:"2 2";marker-end:"url(#arrowhead)";stroke:#ccf}#mermaid-1687488385537 .note{stroke:#aa3;fill:#fff5ad}#mermaid-1687488385537 .noteText{fill:#000;stroke:none;font-family:trebuchet ms,verdana,arial;font-size:14px}#mermaid-1687488385537 .section{stroke:none;opacity:.2}#mermaid-1687488385537 .section0{fill:rgba(102,102,255,.49)}#mermaid-1687488385537 .section2{fill:#fff400}#mermaid-1687488385537 .section1,#mermaid-1687488385537 .section3{fill:#fff;opacity:.2}#mermaid-1687488385537 .sectionTitle0,#mermaid-1687488385537 .sectionTitle1,#mermaid-1687488385537 .sectionTitle2,#mermaid-1687488385537 .sectionTitle3{fill:#333}#mermaid-1687488385537 .sectionTitle{text-anchor:start;font-size:11px;text-height:14px}#mermaid-1687488385537 .grid .tick{stroke:#d3d3d3;opacity:.3;shape-rendering:crispEdges}#mermaid-1687488385537 .grid path{stroke-width:0}#mermaid-1687488385537 .today{fill:none;stroke:red;stroke-width:2px}#mermaid-1687488385537 .task{stroke-width:2}#mermaid-1687488385537 .taskText{text-anchor:middle;font-size:11px}#mermaid-1687488385537 .taskTextOutsideRight{fill:#000;text-anchor:start;font-size:11px}#mermaid-1687488385537 .taskTextOutsideLeft{fill:#000;text-anchor:end;font-size:11px}#mermaid-1687488385537 .taskText0,#mermaid-1687488385537 .taskText1,#mermaid-1687488385537 .taskText2,#mermaid-1687488385537 .taskText3{fill:#fff}#mermaid-1687488385537 .task0,#mermaid-1687488385537 .task1,#mermaid-1687488385537 .task2,#mermaid-1687488385537 .task3{fill:#8a90dd;stroke:#534fbc}#mermaid-1687488385537 .taskTextOutside0,#mermaid-1687488385537 .taskTextOutside1,#mermaid-1687488385537 .taskTextOutside2,#mermaid-1687488385537 .taskTextOutside3{fill:#000}#mermaid-1687488385537 .active0,#mermaid-1687488385537 .active1,#mermaid-1687488385537 .active2,#mermaid-1687488385537 .active3{fill:#bfc7ff;stroke:#534fbc}#mermaid-1687488385537 .activeText0,#mermaid-1687488385537 .activeText1,#mermaid-1687488385537 .activeText2,#mermaid-1687488385537 .activeText3{fill:#000!important}#mermaid-1687488385537 .done0,#mermaid-1687488385537 .done1,#mermaid-1687488385537 .done2,#mermaid-1687488385537 .done3{stroke:grey;fill:#d3d3d3;stroke-width:2}#mermaid-1687488385537 .doneText0,#mermaid-1687488385537 .doneText1,#mermaid-1687488385537 .doneText2,#mermaid-1687488385537 .doneText3{fill:#000!important}#mermaid-1687488385537 .crit0,#mermaid-1687488385537 .crit1,#mermaid-1687488385537 .crit2,#mermaid-1687488385537 .crit3{stroke:#f88;fill:red;stroke-width:2}#mermaid-1687488385537 .activeCrit0,#mermaid-1687488385537 .activeCrit1,#mermaid-1687488385537 .activeCrit2,#mermaid-1687488385537 .activeCrit3{stroke:#f88;fill:#bfc7ff;stroke-width:2}#mermaid-1687488385537 .doneCrit0,#mermaid-1687488385537 .doneCrit1,#mermaid-1687488385537 .doneCrit2,#mermaid-1687488385537 .doneCrit3{stroke:#f88;fill:#d3d3d3;stroke-width:2;cursor:pointer;shape-rendering:crispEdges}#mermaid-1687488385537 .activeCritText0,#mermaid-1687488385537 .activeCritText1,#mermaid-1687488385537 .activeCritText2,#mermaid-1687488385537 .activeCritText3,#mermaid-1687488385537 .doneCritText0,#mermaid-1687488385537 .doneCritText1,#mermaid-1687488385537 .doneCritText2,#mermaid-1687488385537 .doneCritText3{fill:#000!important}#mermaid-1687488385537 .titleText{text-anchor:middle;font-size:18px;fill:#000}#mermaid-1687488385537 g.classGroup text{fill:#9370db;stroke:none;font-family:trebuchet ms,verdana,arial;font-size:10px}#mermaid-1687488385537 g.classGroup rect{fill:#ececff;stroke:#9370db}#mermaid-1687488385537 g.classGroup line{stroke:#9370db;stroke-width:1}#mermaid-1687488385537 .classLabel .box{stroke:none;stroke-width:0;fill:#ececff;opacity:.5}#mermaid-1687488385537 .classLabel .label{fill:#9370db;font-size:10px}#mermaid-1687488385537 .relation{stroke:#9370db;stroke-width:1;fill:none}#mermaid-1687488385537 #compositionEnd,#mermaid-1687488385537 #compositionStart{fill:#9370db;stroke:#9370db;stroke-width:1}#mermaid-1687488385537 #aggregationEnd,#mermaid-1687488385537 #aggregationStart{fill:#ececff;stroke:#9370db;stroke-width:1}#mermaid-1687488385537 #dependencyEnd,#mermaid-1687488385537 #dependencyStart,#mermaid-1687488385537 #extensionEnd,#mermaid-1687488385537 #extensionStart{fill:#9370db;stroke:#9370db;stroke-width:1}#mermaid-1687488385537 .branch-label,#mermaid-1687488385537 .commit-id,#mermaid-1687488385537 .commit-msg{fill:#d3d3d3;color:#d3d3d3}</style><style>#mermaid-1687488385537 {
+  <svg id="mermaid-1692057073358" width="100%" xmlns="http://www.w3.org/2000/svg" height="100%" style="max-width:450px;" viewBox="-50 -10 450 231"><style>#mermaid-1692057073358 .label{font-family:trebuchet ms,verdana,arial;color:#333}#mermaid-1692057073358 .node circle,#mermaid-1692057073358 .node ellipse,#mermaid-1692057073358 .node polygon,#mermaid-1692057073358 .node rect{fill:#ececff;stroke:#9370db;stroke-width:1px}#mermaid-1692057073358 .node.clickable{cursor:pointer}#mermaid-1692057073358 .arrowheadPath{fill:#333}#mermaid-1692057073358 .edgePath .path{stroke:#333;stroke-width:1.5px}#mermaid-1692057073358 .edgeLabel{background-color:#e8e8e8}#mermaid-1692057073358 .cluster rect{fill:#ffffde!important;stroke:#aa3!important;stroke-width:1px!important}#mermaid-1692057073358 .cluster text{fill:#333}#mermaid-1692057073358 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:trebuchet ms,verdana,arial;font-size:12px;background:#ffffde;border:1px solid #aa3;border-radius:2px;pointer-events:none;z-index:100}#mermaid-1692057073358 .actor{stroke:#ccf;fill:#ececff}#mermaid-1692057073358 text.actor{fill:#000;stroke:none}#mermaid-1692057073358 .actor-line{stroke:grey}#mermaid-1692057073358 .messageLine0{marker-end:"url(#arrowhead)"}#mermaid-1692057073358 .messageLine0,#mermaid-1692057073358 .messageLine1{stroke-width:1.5;stroke-dasharray:"2 2";stroke:#333}#mermaid-1692057073358 #arrowhead{fill:#333}#mermaid-1692057073358 #crosshead path{fill:#333!important;stroke:#333!important}#mermaid-1692057073358 .messageText{fill:#333;stroke:none}#mermaid-1692057073358 .labelBox{stroke:#ccf;fill:#ececff}#mermaid-1692057073358 .labelText,#mermaid-1692057073358 .loopText{fill:#000;stroke:none}#mermaid-1692057073358 .loopLine{stroke-width:2;stroke-dasharray:"2 2";marker-end:"url(#arrowhead)";stroke:#ccf}#mermaid-1692057073358 .note{stroke:#aa3;fill:#fff5ad}#mermaid-1692057073358 .noteText{fill:#000;stroke:none;font-family:trebuchet ms,verdana,arial;font-size:14px}#mermaid-1692057073358 .section{stroke:none;opacity:.2}#mermaid-1692057073358 .section0{fill:rgba(102,102,255,.49)}#mermaid-1692057073358 .section2{fill:#fff400}#mermaid-1692057073358 .section1,#mermaid-1692057073358 .section3{fill:#fff;opacity:.2}#mermaid-1692057073358 .sectionTitle0,#mermaid-1692057073358 .sectionTitle1,#mermaid-1692057073358 .sectionTitle2,#mermaid-1692057073358 .sectionTitle3{fill:#333}#mermaid-1692057073358 .sectionTitle{text-anchor:start;font-size:11px;text-height:14px}#mermaid-1692057073358 .grid .tick{stroke:#d3d3d3;opacity:.3;shape-rendering:crispEdges}#mermaid-1692057073358 .grid path{stroke-width:0}#mermaid-1692057073358 .today{fill:none;stroke:red;stroke-width:2px}#mermaid-1692057073358 .task{stroke-width:2}#mermaid-1692057073358 .taskText{text-anchor:middle;font-size:11px}#mermaid-1692057073358 .taskTextOutsideRight{fill:#000;text-anchor:start;font-size:11px}#mermaid-1692057073358 .taskTextOutsideLeft{fill:#000;text-anchor:end;font-size:11px}#mermaid-1692057073358 .taskText0,#mermaid-1692057073358 .taskText1,#mermaid-1692057073358 .taskText2,#mermaid-1692057073358 .taskText3{fill:#fff}#mermaid-1692057073358 .task0,#mermaid-1692057073358 .task1,#mermaid-1692057073358 .task2,#mermaid-1692057073358 .task3{fill:#8a90dd;stroke:#534fbc}#mermaid-1692057073358 .taskTextOutside0,#mermaid-1692057073358 .taskTextOutside1,#mermaid-1692057073358 .taskTextOutside2,#mermaid-1692057073358 .taskTextOutside3{fill:#000}#mermaid-1692057073358 .active0,#mermaid-1692057073358 .active1,#mermaid-1692057073358 .active2,#mermaid-1692057073358 .active3{fill:#bfc7ff;stroke:#534fbc}#mermaid-1692057073358 .activeText0,#mermaid-1692057073358 .activeText1,#mermaid-1692057073358 .activeText2,#mermaid-1692057073358 .activeText3{fill:#000!important}#mermaid-1692057073358 .done0,#mermaid-1692057073358 .done1,#mermaid-1692057073358 .done2,#mermaid-1692057073358 .done3{stroke:grey;fill:#d3d3d3;stroke-width:2}#mermaid-1692057073358 .doneText0,#mermaid-1692057073358 .doneText1,#mermaid-1692057073358 .doneText2,#mermaid-1692057073358 .doneText3{fill:#000!important}#mermaid-1692057073358 .crit0,#mermaid-1692057073358 .crit1,#mermaid-1692057073358 .crit2,#mermaid-1692057073358 .crit3{stroke:#f88;fill:red;stroke-width:2}#mermaid-1692057073358 .activeCrit0,#mermaid-1692057073358 .activeCrit1,#mermaid-1692057073358 .activeCrit2,#mermaid-1692057073358 .activeCrit3{stroke:#f88;fill:#bfc7ff;stroke-width:2}#mermaid-1692057073358 .doneCrit0,#mermaid-1692057073358 .doneCrit1,#mermaid-1692057073358 .doneCrit2,#mermaid-1692057073358 .doneCrit3{stroke:#f88;fill:#d3d3d3;stroke-width:2;cursor:pointer;shape-rendering:crispEdges}#mermaid-1692057073358 .activeCritText0,#mermaid-1692057073358 .activeCritText1,#mermaid-1692057073358 .activeCritText2,#mermaid-1692057073358 .activeCritText3,#mermaid-1692057073358 .doneCritText0,#mermaid-1692057073358 .doneCritText1,#mermaid-1692057073358 .doneCritText2,#mermaid-1692057073358 .doneCritText3{fill:#000!important}#mermaid-1692057073358 .titleText{text-anchor:middle;font-size:18px;fill:#000}#mermaid-1692057073358 g.classGroup text{fill:#9370db;stroke:none;font-family:trebuchet ms,verdana,arial;font-size:10px}#mermaid-1692057073358 g.classGroup rect{fill:#ececff;stroke:#9370db}#mermaid-1692057073358 g.classGroup line{stroke:#9370db;stroke-width:1}#mermaid-1692057073358 .classLabel .box{stroke:none;stroke-width:0;fill:#ececff;opacity:.5}#mermaid-1692057073358 .classLabel .label{fill:#9370db;font-size:10px}#mermaid-1692057073358 .relation{stroke:#9370db;stroke-width:1;fill:none}#mermaid-1692057073358 #compositionEnd,#mermaid-1692057073358 #compositionStart{fill:#9370db;stroke:#9370db;stroke-width:1}#mermaid-1692057073358 #aggregationEnd,#mermaid-1692057073358 #aggregationStart{fill:#ececff;stroke:#9370db;stroke-width:1}#mermaid-1692057073358 #dependencyEnd,#mermaid-1692057073358 #dependencyStart,#mermaid-1692057073358 #extensionEnd,#mermaid-1692057073358 #extensionStart{fill:#9370db;stroke:#9370db;stroke-width:1}#mermaid-1692057073358 .branch-label,#mermaid-1692057073358 .commit-id,#mermaid-1692057073358 .commit-msg{fill:#d3d3d3;color:#d3d3d3}</style><style>#mermaid-1692057073358 {
     color: rgb(0, 0, 0);
     font: normal normal 400 normal 16px / normal "Times New Roman";
   }</style><g></g><g><line id="actor0" x1="75" y1="5" x2="75" y2="220" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="0" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="75" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="75" dy="0">John</tspan></text></g><g><line id="actor1" x1="275" y1="5" x2="275" y2="220" class="actor-line" stroke-width="0.5px" stroke="#999"></line><rect x="200" y="0" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="275" y="32.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="275" dy="0">Alice</tspan></text></g><defs><marker id="arrowhead" refX="5" refY="2" markerWidth="6" markerHeight="4" orient="auto"><path d="M 0,0 V 4 L6,2 Z"></path></marker></defs><defs><marker id="crosshead" markerWidth="15" markerHeight="8" orient="auto" refX="16" refY="4"><path fill="black" stroke="#000000" stroke-width="1px" d="M 9,2 V 6 L16,4 Z" style="stroke-dasharray: 0, 0;"></path><path fill="none" stroke="#000000" stroke-width="1px" d="M 0,1 L 6,7 M 6,1 L 0,7" style="stroke-dasharray: 0, 0;"></path></marker></defs><g><text x="175" y="93" class="messageText" style="text-anchor: middle;">Hello John, how are you?</text><line x1="275" y1="100" x2="75" y2="100" class="messageLine0" stroke-width="2" stroke="black" marker-end="url(#arrowhead)" style="fill: none;"></line></g><g><text x="175" y="128" class="messageText" style="text-anchor: middle;">Great!</text><line x1="75" y1="135" x2="275" y2="135" class="messageLine1" stroke-width="2" stroke="black" marker-end="url(#arrowhead)" style="stroke-dasharray: 3, 3; fill: none;"></line></g><g><rect x="0" y="155" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="75" y="187.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="75" dy="0">John</tspan></text></g><g><rect x="200" y="155" fill="#eaeaea" stroke="#666" width="150" height="65" rx="3" ry="3" class="actor"></rect><text x="275" y="187.5" dominant-baseline="central" alignment-baseline="central" class="actor" style="text-anchor: middle;"><tspan x="275" dy="0">Alice</tspan></text></g></svg>
